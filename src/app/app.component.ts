@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PostsService } from './services/posts.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'HTTP';
+
+  arrPosts: any[];
+
+  constructor(private postsService: PostsService) {
+    
+  }
+
+  ngOnInit() {
+    this.postsService.getAll()
+      .then(posts => this.arrPosts = posts)
+      .catch(error => console.log(error));
+  }
 }
