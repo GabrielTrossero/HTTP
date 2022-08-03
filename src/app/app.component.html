@@ -1,5 +1,8 @@
+<div>
+  <button (click)="onClickPost()">Enviar Post</button>
+</div>
 <div class="posts">
-  <div class="post" *ngFor="let post of arrPosts">
+  <div class="post" *ngFor="let post of arrPosts" (click)="onClick(post.id)">
     <h4>{{post.title}}</h4>
     <p>{{post.body}}</p>
   </div>

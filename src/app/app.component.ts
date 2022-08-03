@@ -19,4 +19,24 @@ export class AppComponent {
       .then(posts => this.arrPosts = posts)
       .catch(error => console.log(error));
   }
+
+  async onClick(id: number){
+    try {
+    const post = await this.postsService.getById(id);
+    console.log(post);
+    }
+    catch(error) {
+      console.log(error);
+    }
+  }
+
+  onClickPost() {
+    this.postsService.create({
+      title: 'Nuevo Post',
+      body: 'Body del nuevo Post',
+      userId: 22
+    }).then(response => console.log(response))
+    .catch(error => console.log(error));
+  }
+
 }
