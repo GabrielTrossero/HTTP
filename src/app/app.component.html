@@ -1,6 +1,29 @@
 <div>
-  <button (click)="onClickPost()">Enviar Post</button>
+  <button (click)="onClickPost()">Enviar Post Precargado</button>
 </div>
+
+<br>
+
+<div class="formulario">
+  <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+    <div>
+      <label>Título</label>
+      <input type="text" formControlName="title">
+    </div>
+    <div>
+      <label>Cuerpo</label>
+      <input type="text" formControlName="body">
+    </div>
+    <div>
+      <label>Id Usuario</label>
+      <input type="text" formControlName="userId">
+    </div>
+    <input type="submit" value="Enviar">
+  </form>
+</div>
+
+<br>
+
 <div class="posts">
   <div class="post" *ngFor="let post of arrPosts" (click)="onClick(post.id)">
     <h4>{{post.title}}</h4>

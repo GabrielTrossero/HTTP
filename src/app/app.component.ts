@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { PostsService } from './services/posts.service';
 
 @Component({
@@ -9,9 +10,14 @@ import { PostsService } from './services/posts.service';
 export class AppComponent {
 
   arrPosts: any[];
+  formulario: FormGroup;
 
   constructor(private postsService: PostsService) {
-    
+    this.formulario = new FormGroup({
+      title: new FormControl(''),
+      body: new FormControl(''),
+      userId: new FormControl('')
+    })
   }
 
   ngOnInit() {
@@ -37,6 +43,16 @@ export class AppComponent {
       userId: 22
     }).then(response => console.log(response))
     .catch(error => console.log(error));
+  }
+
+  async onSubmit(){
+    try {
+      const response = await this.postsService.create(this.formulario.value);
+      console.log(response);
+    }
+    catch(error){
+      console.log(error);
+    }
   }
 
 }
