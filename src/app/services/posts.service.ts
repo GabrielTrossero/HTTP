@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'; //importo la librería
+import { HttpClient, HttpHeaders } from '@angular/common/http'; //importo la librería
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,14 @@ export class PostsService {
   create({title, body, userId}): Promise<any> {
     const bodyRequest = {title, body, userId}; //recibo un objeto y lo pongo en una variable
 
-    return this.httpClient.post<any>(this.baseUrl, bodyRequest).toPromise();
+    //en caso de que necesitemos especificar una cabecera en la solicitud, lo podemos hacer así
+    const httpOptions = {
+      headers: new HttpHeaders ({
+        'Content-type': 'application/json; charset=UTF-8',
+      })
+    };
+
+    return this.httpClient.post<any>(this.baseUrl, bodyRequest, httpOptions).toPromise();
   }
 
   update({id, title, body, userId}): Promise<any> {
