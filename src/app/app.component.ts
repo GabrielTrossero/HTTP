@@ -36,7 +36,7 @@ export class AppComponent {
     }
   }
 
-  onClickPost() {
+  onClickCreate() {
     this.postsService.create({
       title: 'Nuevo Post',
       body: 'Body del nuevo Post',
@@ -53,6 +53,22 @@ export class AppComponent {
     catch(error){
       console.log(error);
     }
+  }
+
+  onClickUpdate(){
+    this.postsService.update({
+      id: 22,
+      title: 'Título actualizado',
+      body: 'Cuerpo actualizado',
+      userId: 22
+    }).then(response => console.log(response))
+    .catch(error => console.log(error));
+  }
+
+  onClickDelete(){
+    this.postsService.delete(22)
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
   }
 
 }
